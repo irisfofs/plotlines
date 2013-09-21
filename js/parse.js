@@ -40,28 +40,44 @@ function takeName(entity) {
 function parse(data) {
 	console.log(data.relations);
 
-	var characters = {};
-	var events = data.relations.map(function(rel, i) {
+	var people = {};
+	var rel_people = data.relations.map(function(rel, i) {
 		var subjects = (rel.subject.entities || []).filter(takePeople).map(takeName);
 		var objects  = (rel.object && rel.object.entities || []).filter(takePeople).map(takeName);
 		subjects.forEach(function(person, i) {
-			if (!(person in characters))
-				characters[person] = { subjects: [], objects: [] };
-			characters[person].subjects.push(i);
+			if (!(person in people))
+				people[person] = { subjects: [], objects: [] };
+			people[person].subjects.push(i);
 		});
 		objects.forEach(function(person, i) {
-			if (!(person in characters))
-				characters[person] = { subjects: [], objects: [] };
-			characters[person].objects.push(i);
+			if (!(person in people))
+				people[person] = { subjects: [], objects: [] };
+			people[person].objects.push(i);
 		});
-		document.write('<li title="' + rel.sentence + '">' + 
-			'<span class="subject">' + rel.subject.text + '</span>' +
-			' <span class="action">'  + rel.action.text  + '</span>' +
-			(rel.object ? ' <span class="object">' + rel.object.text + '</span>' : '') + '</li>');
 		return { subjects: subjects, objects: objects };
 	});
-	console.log(characters);
-	console.log(events);
+
+	var t = '<table><thead><tr><th>Relation</th>';
+	for (person in people)
+		t += '<th><div class="up"><span>' + person + '</span></div></th>';
+	t += '</tr></thead><tbody>';
+	rel_people.forEach(function(rel, i) {
+		data.relations[i]
+		t += '<tr><td title="' + data.relations[i].sentence + '">' +
+			'<span class="subject">' + data.relations[i].subject.text + '</span>' +
+			' <span class="action">'  + data.relations[i].action.text  + '</span>' +
+			(data.relations[i].object ? ' <span class="object">' + data.relations[i].object.text + '</span>' : '') + '</td>';
+		for (person in people) {
+			t += '<td>';
+			if (-1 !== rel.subjects.indexOf(person))
+				t += 's';
+			if (-1 !== rel.objects.indexOf(person))
+				t += 'o';
+			t += '</td>';
+		}
+	});
+	t += '</tbody></table>';
+	document.write(t);
 }
 
 parse(mock);
