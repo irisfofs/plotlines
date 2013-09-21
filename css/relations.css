@@ -1,12 +1,20 @@
+@import url(../fonts/Whitney/whitney.css);
+
+body {
+	font-family: 'Whitney';
+}
+h1, h2, h3, h4, h5, h6, b, strong, dfn, th {
+	font-weight: 600;
+}
 .subject {
-	color: green;
+	color: #04862e;
 }
 .action {
 	font-style: italic;
-	color: black;
+	color: #c51d23;
 }
 .object {
-	color: blue;
+	color: #4f55f6;
 }
 .up {
 	display: inline-block;
