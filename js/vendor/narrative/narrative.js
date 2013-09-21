@@ -709,6 +709,7 @@ function draw_links(links, svg, safe_name) {
           .style("stroke-linecap", "round")
           .on("mouseover", mouseover_cb)
           .on("mouseout", mouseout_cb)
+    .style("fill", "none")
 
     function mouseover_cb(d) {
 	d3.selectAll("[charid=\"" + d.from.comic_name + "_" + d.char_id + "\"]")
