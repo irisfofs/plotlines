@@ -724,7 +724,7 @@ function draw_links(links, svg, safe_name) {
 
 
 function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse) {
-    d3.json(folder + "/narrative.json", function(j) {
+    d3.json("reparsed.json", function(j) {
 	var margin = {top: 20, right: 25, bottom: 20, left: 1};
 	var width = raw_chart_width - margin.left - margin.right;
 
@@ -763,7 +763,7 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 	total_panels += panel_shift;
 	panel_width = Math.min(width/total_panels, 15);
 
-	d3.xml(folder + "/characters.xml", function(x) {
+	d3.xml("characters.xml", function(x) {
 	    var xchars = read_chars(x);
 
 	    // Calculate chart height based on the number of characters
@@ -916,9 +916,12 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 }
 
 dir = "comics/narrative/";
-draw_chart("Lucky Luke #38, \"Ma Dalton\"", "luckyluke6", dir + "luckyluke6_narrative", true, false, false);
-draw_chart("Tintin #23, \"Tintin and the Picaros\"", "tintin23", dir + "tintin23_narrative", true, true, false);
+///draw_chart("Lucky Luke #38, \"Ma Dalton\"", "luckyluke6", dir + "luckyluke6_narrative", true, false, false);
+///draw_chart("Tintin #23, \"Tintin and the Picaros\"", "tintin23", dir + "tintin23_narrative", true, true, false);
 //draw_chart("Tintin #4, Cigars of the Pharaoh", "tintin4", dir + "tintin4_narrative", true, true, true);
-draw_chart("Dr. McNinja #25, \"A Cumberland Ninja in King Radical's Court\"", "drmcninja25", dir + "drmcninja25_narrative", false, true, true);
+///draw_chart("Dr. McNinja #25, \"A Cumberland Ninja in King Radical's Court\"", "drmcninja25", dir + "drmcninja25_narrative", false, true, true);
 //draw_chart("Bone #28", "bone28", "bone28_narrative", true, false);
 //draw_chart("Chew #32", "chew32", "chew32_narrative", false, true);
+
+dir = '';
+draw_chart('Homestuck', 'homestuck', 'reparsed', true, false);
