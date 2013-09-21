@@ -4,7 +4,7 @@ var link_gap = 2;
 
 var node_width = 10; // Set to panel_width later
 var color = d3.scale.category10();
-var raw_chart_width = 1000;
+var raw_chart_width = 2000;
 
 // Height of empty gaps between groups
 // (Sparse groups and group ordering already
@@ -725,7 +725,7 @@ function draw_links(links, svg, safe_name) {
 
 
 function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse) {
-    d3.json("reparsed.json", function(j) {
+    d3.json(folder + "/reparsed.json", function(j) {
 	var margin = {top: 20, right: 25, bottom: 20, left: 1};
 	var width = raw_chart_width - margin.left - margin.right;
 
@@ -764,7 +764,7 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 	total_panels += panel_shift;
 	panel_width = Math.min(width/total_panels, 15);
 
-	d3.xml("characters.xml", function(x) {
+	d3.xml(folder + "/characters.xml", function(x) {
 	    var xchars = read_chars(x);
 
 	    // Calculate chart height based on the number of characters
