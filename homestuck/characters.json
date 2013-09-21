@@ -20,7 +20,12 @@
 	{"name": "Eridan Ampora", "color": "#6a006a", "handles": [["CA","caligulasAquarium"]]},
 	{"name": "Feferi Peixes", "color": "#77003c", "handles": [["CC","cuttlefishCuller"]]},
 	{"name": "uranianUmbra", "color": "#929292", "handles": []},
+	{"name": "NannaSprite", "color": "#00d5f2", "handles": []},
+	{"name": "CalSprite", "color": "#f2a400", "handles": []}, 
+	{"name": "DaveSprite", "color": "#f2a400", "handles": []}, 
 	{"name": "undyingUmbrage", "color": "#323232", "handles": []},
 	{"name": "Jaspersprite", "color": "#f141ef", "handles": []}
+	{"name": "AradiaBot", "color": "#a10000", "handles": []}
+	{"name": "MotherSprite", "color": "#008141", "handles": []}
 ]
 
