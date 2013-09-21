@@ -41,4 +41,4 @@ for event in plotline:
 new_format['scenes'] = scenes
 
 with open("reparsed.json", "w") as outfile:
-	json.dump(new_format, outfile)
+	json.dump(new_format, outfile, indent=4, separators=(',', ': '))
