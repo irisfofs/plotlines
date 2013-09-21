@@ -31,9 +31,12 @@ for event in plotline:
 			break
 		scene['chars'].append(index)
 
-	scenes.append(scene)
+	if len(scene['chars']) > 0:
+		scenes.append(scene)
 
-	oldscene = scene
+		oldscene = scene
+	else:
+		count -= 1
 
 new_format['scenes'] = scenes
 
