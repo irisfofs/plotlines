@@ -1,4 +1,4 @@
-var apikey = '90990619763d6298efa6b58ae6c57d6daa63a287';
+var apikey = '2094dd01fd7cbceb7e1bb916840e40e81f25d16f';
 var base = 'http://access.alchemyapi.com/';
 var endpoints = {
 	'relations': 'calls/text/TextGetRelations'
@@ -39,11 +39,29 @@ function takeName(entity) {
 }
 function parse(data) {
 	console.log(data.relations);
-	data.relations.map(function(rel, i) {
-		console.log(i,
-					(rel.subject.entities || []).filter(takePeople).map(takeName),
-					(rel.object && rel.object.entities || []).filter(takePeople).map(takeName))
+
+	var characters = {};
+	var events = data.relations.map(function(rel, i) {
+		var subjects = (rel.subject.entities || []).filter(takePeople).map(takeName);
+		var objects  = (rel.object && rel.object.entities || []).filter(takePeople).map(takeName);
+		subjects.forEach(function(person, i) {
+			if (!(person in characters))
+				characters[person] = { subjects: [], objects: [] };
+			characters[person].subjects.push(i);
+		});
+		objects.forEach(function(person, i) {
+			if (!(person in characters))
+				characters[person] = { subjects: [], objects: [] };
+			characters[person].objects.push(i);
+		});
+		document.write('<li title="' + rel.sentence + '">' + 
+			'<span class="subject">' + rel.subject.text + '</span>' +
+			' <span class="action">'  + rel.action.text  + '</span>' +
+			(rel.object ? ' <span class="object">' + rel.object.text + '</span>' : '') + '</li>');
+		return { subjects: subjects, objects: objects };
 	});
+	console.log(characters);
+	console.log(events);
 }
 
 parse(mock);

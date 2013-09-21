@@ -1,0 +1,10 @@
+.subject {
+	color: green;
+}
+.action {
+	font-style: italic;
+	color: black;
+}
+.object {
+	color: blue;
+}
