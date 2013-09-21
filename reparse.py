@@ -5,8 +5,6 @@ chars = json.load(open("characters.json"))
 
 new_format = {}
 
-new_format['panels'] = len(plotline)
-
 scenes = []
 oldscene = {"start":0, "duration": 0, "id": -1}
 count = 0
@@ -39,6 +37,8 @@ for event in plotline:
 		count -= 1
 
 new_format['scenes'] = scenes
+
+new_format['panels'] = count
 
 with open("reparsed.json", "w") as outfile:
 	json.dump(new_format, outfile, indent=4, separators=(',', ': '))
