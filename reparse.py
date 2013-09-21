@@ -2,12 +2,15 @@ import json
 
 SHOW_ALONE_TIME = False
 TOTAL_COMICS_SHOWN = 2000
+IN_FILE = "plotlines2.json"
+CHAR_FILE = "characters.json"
+OUT_FILE = "reparsed.json"
 
-plotline = json.load(open("plotlines2.json"))
-chars = json.load(open("characters.json"))
 
+
+plotline = json.load(open(IN_FILE))
+chars = json.load(open(CHAR_FILE))
 new_format = {}
-
 scenes = []
 oldscene = {"start":0, "duration": 0, "id": -1}
 count = 0
@@ -52,7 +55,7 @@ for event in plotline:
 
 new_format['scenes'] = scenes
 
-new_format['panels'] = event_count
+new_format['panels'] = count
 
-with open("reparsed.json", "w") as outfile:
+with open(OUT_FILE, "w") as outfile:
 	json.dump(new_format, outfile, indent=4, separators=(',', ': '))
