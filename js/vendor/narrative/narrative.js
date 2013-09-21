@@ -925,4 +925,4 @@ dir = "comics/narrative/";
 //draw_chart("Chew #32", "chew32", "chew32_narrative", false, true);
 
 dir = '';
-draw_chart('Homestuck', 'homestuck', 'reparsed', true, false);
+draw_chart('Homestuck', 'homestuck', 'homestuck', true, false);
