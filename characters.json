@@ -1,32 +1,27 @@
-[{	"name": "John Egbert",
-
-	}]
-
-{"name": "John Egbert", "color": "#0715cd", "handles": ["ectoBiologist", "ghostyTrickster"],
-	
-},
-{"name": "Rose Lalonde", "color": "#b536da"},
-{"name": "Dave Strider", "color": "#e00707"},
-{"name": "Jade Harley", "color": "#4ac925"},
-
-{"name": "Jane Crocker", "color": "#00d5f2"},
-{"name": "Jake English", "color": "#1f9400"},
-{"name": "Roxy Lalonde", "color": "#ff6ff2"},
-{"name": "Dirk Strider", "color": "#f2a400"},
-
-{"name": "Aradia Megido", "color": "#a10000"},
-{"name": "Tavros Nitram", "color": "#a15000"},
-{"name": "Sollux Captor", "color": "#a1a100"},
-{"name": "Karkat", "color": "#626262"},
-{"name": "Nepeta", "color": "#416600"},
-{"name": "Kanaya", "color": "#008141"},
-{"name": "Terezi", "color": "#008282"},
-{"name": "Vriska", "color": "#005682"},
-{"name": "Equius", "color": "#000056"},
-{"name": "Gamzee", "color": "#2b0057"},
-{"name": "Eridan", "color": "#6a006a"},
-{"name": "Feferi", "color": "#77003c"},
-
-{"name": "uranianUmbra", "color": "#929292"},
-{"name": "undyingUmbrage", "color": "#323232"},
-{"name": "Jaspersprite", "color": "#f141ef"},
+{
+Characters:[
+	{"name": "John Egbert", "color": "#0715cd", "handles": [("EB","ectoBiologist"), ("GT","ghostyTrickster")]},
+	{"name": "Rose Lalonde", "color": "#b536da", "handles": [("TT","tentacleTherapist")]},
+	{"name": "Dave Strider", "color": "#e00707", "handles": [("TG"," turntechGodhead")]},
+	{"name": "Jade Harley", "color": "#4ac925", "handles": [("GG", "gardenGnostic")]},
+	{"name": "Jane Crocker", "color": "#00d5f2", "handles": [("GG","gutsyGumshoe")]},
+	{"name": "Jake English", "color": "#1f9400", "handles": [("GT","golgothasTerror")]},
+	{"name": "Roxy Lalonde", "color": "#ff6ff2", "handles": [("TG","tipsyGnostalgic")]},
+	{"name": "Dirk Strider", "color": "#f2a400", "handles": [("TT","timaeusTestified")]},
+	{"name": "Aradia Megido", "color": "#a10000", "handles": [("AA","apocalypseArisen")]},
+	{"name": "Tavros Nitram", "color": "#a15000", "handles": [("AT","adiosToreador")]},
+	{"name": "Sollux Captor", "color": "#a1a100", "handles": [("TA","twinArmageddons")]},
+	{"name": "Karkat Vantas", "color": "#626262", "handles": [("CG","carcinoGeneticist")]},
+	{"name": "Nepeta Leijon", "color": "#416600", "handles": [("AC","arsenicCatnip")]},
+	{"name": "Kanaya Maryam", "color": "#008141", "handles": [("GA","grimAuxiliatrix")]},
+	{"name": "Terezi Pyrope", "color": "#008282", "handles": [("GC","gallowsCalibrator")]},
+	{"name": "Vriska Serket", "color": "#005682", "handles": [("AG","arachnidsGrip")]},
+	{"name": "Equius Zahhak", "color": "#000056", "handles": [("CT","centaursTesticle")]},
+	{"name": "Gamzee Makara", "color": "#2b0057", "handles": [("TC","terminallyCapricious")]},
+	{"name": "Eridan Ampora", "color": "#6a006a", "handles": [("CA","caligulasAquarium")]},
+	{"name": "Feferi Peixes", "color": "#77003c", "handles": [("CC","cuttlefishCuller")]},
+	{"name": "uranianUmbra", "color": "#929292", "handles": []},
+	{"name": "undyingUmbrage", "color": "#323232", "handles": []},
+	{"name": "Jaspersprite", "color": "#f141ef", "handles": []},
+	]
+}
