@@ -30,7 +30,6 @@ try:
 				if result is not None:
 					handles[result.group(1)] = True
 
-		# print handles.keys()
 
 		# comic wrapper table
 		wrapper = soup.find("table", attrs={"width": "600"})
