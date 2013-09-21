@@ -73,7 +73,7 @@ function parse(data) {
 
 	var cols = 2 + Object.keys(people).length;
 	sentences.forEach(function(sentence, s) {
-		t += '<tr><td colspan="2"><strong>' + sentence.sentence + '</strong></td></tr>';
+		t += '<tr><td colspan="2"><u>' + sentence.sentence + '</u></td></tr>';
 		sentence.relations.forEach(function(r) {
 			var rel = data.relations[r];
 			var rel_person = rel_people[r];
@@ -84,9 +84,9 @@ function parse(data) {
 			for (person in people) {
 				t += '<td>';
 				if (-1 !== rel_person.subjects.indexOf(person))
-					t += 's';
+					t += '◆';
 				if (-1 !== rel_person.objects.indexOf(person))
-					t += 'o';
+					t += '◇';
 				t += '</td>';
 			}
 		});
