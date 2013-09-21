@@ -1,13 +1,20 @@
 import json
 
-plotline = json.load(open("plotlines2.json"))
-chars = json.load(open("characters.json"))
+SHOW_ALONE_TIME = False
+TOTAL_COMICS_SHOWN = 2000
+IN_FILE = "plotlines2.json"
+CHAR_FILE = "characters.json"
+OUT_FILE = "reparsed.json"
 
+
+
+plotline = json.load(open(IN_FILE))
+chars = json.load(open(CHAR_FILE))
 new_format = {}
-
 scenes = []
-oldscene = {"start":0, "duration": 0, "chars": [], "id": -1}
+oldscene = {"start":0, "duration": 0, "id": -1}
 count = 0
+event_count = 0
 
 def indexOfChar(name):
 	for i in range(len(chars)):
@@ -15,14 +22,20 @@ def indexOfChar(name):
 			return i
 	return -1
 
+if SHOW_ALONE_TIME:
+	char_min = 0
+else:
+	char_min = 1
+
 for event in plotline:
 	scene = {"duration": 1,
 			 "start": oldscene['start'] + oldscene['duration'],
 			 "id": count}
 	count += 1
+	event_count += 1
 
-	# if count > 1000:
-	# 	break
+	if event_count > TOTAL_COMICS_SHOWN:
+		break
 
 	scene['chars'] = []
 	for act in event['actors']:
@@ -32,22 +45,17 @@ for event in plotline:
 			break
 		scene['chars'].append(index)
 
-	scene['chars'].sort()
-	# combine identical scenes
-	if scene['chars'] == oldscene['chars']:
-		oldscene['duration'] += 1
-		continue
-
-	if len(scene['chars']) > 0:
+	if len(scene['chars']) > char_min:
 		scenes.append(scene)
 
 		oldscene = scene
 	else:
 		count -= 1
 
+
 new_format['scenes'] = scenes
 
 new_format['panels'] = count
 
-with open("reparsed.json", "w") as outfile:
+with open(OUT_FILE, "w") as outfile:
 	json.dump(new_format, outfile, indent=4, separators=(',', ': '))

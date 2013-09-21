@@ -40,6 +40,15 @@ function takeName(entity) {
 function parse(data) {
 	console.log(data.relations);
 
+	var sentences = [];
+	data.relations.forEach(function(rel, i) {
+		var sentence = rel.sentence;
+		if (!sentences.length || sentence !== sentences[sentences.length - 1].sentence)
+			sentences.push({ sentence: sentence, relations: [ i ] });
+		else
+			sentences[sentences.length - 1].relations.push(i);
+	});
+
 	var people = {};
 	var rel_people = data.relations.map(function(rel, i) {
 		var subjects = (rel.subject.entities || []).filter(takePeople).map(takeName);
@@ -57,24 +66,30 @@ function parse(data) {
 		return { subjects: subjects, objects: objects };
 	});
 
-	var t = '<table><thead><tr><th>Relation</th>';
+	var t = '<table><thead><tr><th>Sentence</th><th>Relation</th>';
 	for (person in people)
 		t += '<th><div class="up"><span>' + person + '</span></div></th>';
 	t += '</tr></thead><tbody>';
-	rel_people.forEach(function(rel, i) {
-		data.relations[i]
-		t += '<tr><td title="' + data.relations[i].sentence + '">' +
-			'<span class="subject">' + data.relations[i].subject.text + '</span>' +
-			' <span class="action">'  + data.relations[i].action.text  + '</span>' +
-			(data.relations[i].object ? ' <span class="object">' + data.relations[i].object.text + '</span>' : '') + '</td>';
-		for (person in people) {
-			t += '<td>';
-			if (-1 !== rel.subjects.indexOf(person))
-				t += 's';
-			if (-1 !== rel.objects.indexOf(person))
-				t += 'o';
-			t += '</td>';
-		}
+
+	var cols = 2 + Object.keys(people).length;
+	sentences.forEach(function(sentence, s) {
+		t += '<tr><td colspan="2"><strong>' + sentence.sentence + '</strong></td></tr>';
+		sentence.relations.forEach(function(r) {
+			var rel = data.relations[r];
+			var rel_person = rel_people[r];
+			t += '<tr><td></td><td title="' + rel.sentence + '">' +
+				'<span class="subject">' + rel.subject.text + '</span>' +
+				' <span class="action">'  + rel.action.text  + '</span>' +
+				(rel.object ? ' <span class="object">' + rel.object.text + '</span>' : '') + '</td>';
+			for (person in people) {
+				t += '<td>';
+				if (-1 !== rel_person.subjects.indexOf(person))
+					t += 's';
+				if (-1 !== rel_person.objects.indexOf(person))
+					t += 'o';
+				t += '</td>';
+			}
+		});
 	});
 	t += '</tbody></table>';
 	document.getElementById('t').innerHTML = t;
