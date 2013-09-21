@@ -77,7 +77,5 @@ function parse(data) {
 		}
 	});
 	t += '</tbody></table>';
-	document.write(t);
+	document.getElementById('t').innerHTML = t;
 }
-
-parse(mock);
