@@ -21,6 +21,9 @@ for event in plotline:
 			 "id": count}
 	count += 1
 
+	if count > 500:
+		break
+
 	scene['chars'] = []
 	for act in event['actors']:
 		index = indexOfChar(act)
