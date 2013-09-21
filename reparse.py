@@ -6,7 +6,7 @@ chars = json.load(open("characters.json"))
 new_format = {}
 
 scenes = []
-oldscene = {"start":0, "duration": 0, "id": -1}
+oldscene = {"start":0, "duration": 0, "chars": [], "id": -1}
 count = 0
 
 def indexOfChar(name):
@@ -31,6 +31,12 @@ for event in plotline:
 			print "Something went terribly wrong" + act
 			break
 		scene['chars'].append(index)
+
+	scene['chars'].sort()
+	# combine identical scenes
+	if scene['chars'] == oldscene['chars']:
+		oldscene['duration'] += 1
+		continue
 
 	if len(scene['chars']) > 0:
 		scenes.append(scene)
