@@ -36,7 +36,12 @@
 		function engage() {
 			var data = parse(relations(scrape_wikipedia(document.getElementById('title').value)));
 			table(data);
-			draw_chart('narrative', 'narrative', format(data), true, false);
+			try {
+				draw_chart('narrative', 'narrative', format(data), true, false);
+			}
+			catch(e) {
+				throw(e);
+			}
 		}
 	</script>
 </body>
