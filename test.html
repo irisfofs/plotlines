@@ -22,7 +22,8 @@
 		
 	</main>
 	<script type="text/javascript">
-table(parse(relations(scrape_wikipedia(prompt('Enter article title', 'To Kill a Mockingbird')))));
+		var title = prompt('Enter article title', 'To Kill a Mockingbird');
+		table(parse(relations(scrape_wikipedia(title))));
 	</script>
 </body>
 </html>
