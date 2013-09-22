@@ -96,6 +96,10 @@ function format(data) {
 					return data.people_array.indexOf(person);
 				})
 			};
+		}).filter(function(elem) {
+			// Remove events with no characters in them
+			// Doesn't appear to be 100% effective for some reason
+			return elem.chars.length > 0;
 		})
 	};
 }
