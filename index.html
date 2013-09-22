@@ -39,20 +39,37 @@
 				return;
 
 			var title = title_el.value;
+			var OFFLINE = true;
 			try {
-				var data = get_xml(
-					title,
-					function (xml) {
-						relations(
-							scrape_wikipedia(xml),
-							function (json) {
-								var data = parse(json);
-								table(data);
-								draw_chart('narrative', 'narrative', format(data), true, false);
-							}
-						);
-					}
-				);
+				var finish = function (data) {
+						table(data);
+						draw_chart('narrative', 'narrative', format(data), true, false);
+				};
+
+				if (OFFLINE) {
+					data = $.ajax({
+						'dataType': 'json',
+						'url': 'server/cache.php',
+						'data': {
+							'file': title + ".json";
+						}
+					}).done(function(json) { finish(json); });
+				} else {
+
+					var data = get_xml(
+						title,
+						function (xml) {
+							relations(
+								scrape_wikipedia(xml),
+								function (json) {
+									var data = parse(json);
+									finish(data);
+								}
+							);
+						}
+					);
+				}
+				
 				document.getElementById('sentencesButton').innerHTML = "<button>Toggle Sentences</button>";
 				table(data);
 				draw_chart('narrative', 'narrative', format(data), true, false);
