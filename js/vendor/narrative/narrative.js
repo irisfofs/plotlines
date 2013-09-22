@@ -930,5 +930,6 @@ function zoom() {
 }
 
 dir = '';
-safe_name = "homestuck"
-draw_chart('Homestuck', safe_name, 'homestuck', true, false);
+safe_name = "homestuck";
+//draw_chart('Homestuck', safe_name, 'homestuck', true, false);
+draw_chart('Test', 'test', 'data', true, false);

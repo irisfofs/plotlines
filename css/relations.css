@@ -2,6 +2,7 @@
 
 body {
 	font-family: 'Whitney';
+	text-rendering: optimizeLegibility;
 }
 h1, h2, h3, h4, h5, h6, b, strong, dfn, th {
 	font-weight: 600;
@@ -34,4 +35,8 @@ h1, h2, h3, h4, h5, h6, b, strong, dfn, th {
 	content: "";
 	float: left;
 	margin-top: 100%;
+}
+abbr {
+	font-weight: 700;
+	border-bottom: 1px dotted currentColor;
 }

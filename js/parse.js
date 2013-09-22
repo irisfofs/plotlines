@@ -66,7 +66,7 @@ function parse(data) {
 		return { subjects: subjects, objects: objects };
 	});
 
-	var t = '<table><thead><tr><th>Sentence</th><th>Relation</th>';
+	var t = '<table class="sentences"><thead><tr><th>Sentence</th><th>Relation</th>';
 	for (person in people)
 		t += '<th><div class="up"><span>' + person + '</span></div></th>';
 	t += '</tr></thead><tbody>';
@@ -77,8 +77,15 @@ function parse(data) {
 		sentence.relations.forEach(function(r) {
 			var rel = data.relations[r];
 			var rel_person = rel_people[r];
-			t += '<tr><td></td><td title="' + rel.sentence + '">' +
-				'<span class="subject">' + rel.subject.text + '</span>' +
+
+			var subject = rel.subject.text;
+			if (rel.subject.entities)
+				rel.subject.entities.forEach(function(entity) {
+					subject = subject.replace(entity.text, '<abbr title="' + entity.text + '">' + entity.text + '</abbr>');
+				});
+
+			t += '<tr><td></td><td>' +
+				'<span class="subject">' + subject + '</span>' +
 				' <span class="action">'  + rel.action.text  + '</span>' +
 				(rel.object ? ' <span class="object">' + rel.object.text + '</span>' : '') + '</td>';
 			for (person in people) {
