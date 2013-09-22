@@ -64,17 +64,21 @@ function parse(data) {
 		});
 		return { subjects: subjects, objects: objects, both: subjects.concat(objects) };
 	});
+	var people_array = [];
+	for (var person in people)
+		people_array.push(person);
 
 	return {
 		sentences: sentences,
 		people: people,
+		people_array: people_array,
 		relations: data.relations,
 		rel_people: rel_people
 	};
 }
 function format(data) {
 	return {
-		people: data.people,
+		people: data.people_array,
 		sentences: data.sentences.map(function(sentence, i) {
 			return {
 				duration: 1,
@@ -83,7 +87,9 @@ function format(data) {
 				sentence: sentence.sentence,
 				chars: [].concat.apply([],sentence.relations.map(function(r) {
 					return data.rel_people[r].both;
-				}))
+				})).map(function(person) {
+					return data.people_array.indexOf(person);
+				})
 			};
 		})
 	};
