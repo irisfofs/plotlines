@@ -39,8 +39,6 @@ function takeName(entity) {
 	return entity.text;
 }
 function parse(data) {
-	console.log(data.relations);
-
 	var sentences = [];
 	data.relations.forEach(function(rel, i) {
 		var sentence = rel.sentence;
@@ -67,17 +65,25 @@ function parse(data) {
 		return { subjects: subjects, objects: objects };
 	});
 
+	return {
+		sentences: sentences,
+		people: people,
+		relations: data.relations,
+		rel_people: rel_people
+	};
+}
+function table(data) {
 	var t = '<table class="sentences"><thead><tr><th>Sentence</th><th>Relation</th>';
-	for (person in people)
+	for (person in data.people)
 		t += '<th><div class="up"><span>' + person + '</span></div></th>';
 	t += '</tr></thead><tbody>';
 
-	var cols = 2 + Object.keys(people).length;
-	sentences.forEach(function(sentence, s) {
+	var cols = 2 + Object.keys(data.people).length;
+	data.sentences.forEach(function(sentence, s) {
 		t += '<tr><td colspan="2"><u>' + sentence.sentence + '</u></td></tr>';
 		sentence.relations.forEach(function(r) {
 			var rel = data.relations[r];
-			var rel_person = rel_people[r];
+			var rel_person = data.rel_people[r];
 
 			var subject = rel.subject.text;
 			if (rel.subject.entities)
@@ -89,7 +95,7 @@ function parse(data) {
 				'<span class="subject">' + subject + '</span>' +
 				' <span class="action">'  + rel.action.text  + '</span>' +
 				(rel.object ? ' <span class="object">' + rel.object.text + '</span>' : '') + '</td>';
-			for (person in people) {
+			for (person in data.people) {
 				t += '<td>';
 				if (-1 !== rel_person.subjects.indexOf(person))
 					t += '◆';
