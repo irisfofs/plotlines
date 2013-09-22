@@ -810,6 +810,7 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 	    }
 	    */
 
+	    d3.select("#chart svg").remove();
 	    var svg = d3.select("#chart").append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
