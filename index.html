@@ -27,6 +27,7 @@
 		<p id="hover"></p>
 		<div id="chart">
 		</div>
+		<div id="sentencesButton"></div>
 		<div id="t">
 		</div>
 	</main>
@@ -52,6 +53,12 @@
 						);
 					}
 				);
+				document.getElementById('sentencesButton').innerHTML = "<button>Toggle Sentences</button>";
+				table(data);
+				draw_chart('narrative', 'narrative', format(data), true, false);
+				$("#sentencesButton").click(function(){
+  				$("#t").slideToggle('slow');
+				});
 			}
 			catch(e) {
 				title_el.className = 'error';
