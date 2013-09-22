@@ -4,7 +4,7 @@ var link_gap = 2;
 
 var node_width = 10; // Set to panel_width later
 var color = d3.scale.category10();
-var raw_chart_width = 2000;
+var raw_chart_width = 1000;
 
 // Height of empty gaps between groups
 // (Sparse groups and group ordering already
@@ -12,7 +12,7 @@ var raw_chart_width = 2000;
 var group_gap = 0;
 
 // This is used for more than just text height.
-var text_height = 8;
+var text_height = 12;
 
 // If a name's x is smaller than this value * chart width,
 // the name appears at the start of the chart, as 
@@ -373,7 +373,7 @@ function add_char_scenes(chars, scenes, links, groups, panel_shift, comic_name) 
     // Set y values
     var cury = 0;
     groups.forEach(function(g) {
-        var height = g.all_chars.length*text_height;
+        var height = Math.max(10, g.all_chars.length*text_height);
 	g.min = cury;
 	g.max = g.min + height;
 	cury += height + group_gap;
@@ -571,9 +571,9 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
       .attr("width", function(d) { return d.width; })
       .attr("height", function(d) { return d.height; })
       .attr("class", "scene")
-      //.style("fill", function(d) { return "#1f77b4"; })
-      .style("fill", "none")
-      //.style("stroke", function(d) { return "#0f3a58"; })
+      .style("fill", function(d) { return "#fff"; })
+      // .style("fill", "none")
+      .style("stroke", function(d) { return "#333"; })
       .attr("rx", 20)
       .attr("ry", 10)
     .append("title")
@@ -606,11 +606,11 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 	.attr("dy", ".35em")
 	.attr("text-anchor", "end")
 	.attr("transform", null)
-        //.attr("background", "#fff")
+        // .attr("background", "#fff")
 	.text(function(d) { return d.name; })
-        //.style("fill", "#000")
-        //.style("stroke", "#fff")
-        //.style("stroke-width", "0.5px")
+        // .style("fill", "#000")
+        // .style("stroke", "#fff")
+        // .style("stroke-width", "0.5px")
       .filter(function(d) { 
 	  return false;
 	  //return d.x < chart_width / 2; 
@@ -622,11 +622,11 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
     function mouseover(d) {
 	if (d.char_node == true) return;
 
-	var im = new Image();
+	var im = new Text();
 	im.name = "Scene panel";
 	
 	im.id = "scene" + d.id;
-	im.src = "http://www.ledr.com/colours/red.jpg";
+	im.text = d.sentence;
 	im.onload = function(e) {
 	    var w = this.width;
 	    var h = this.height;
@@ -654,7 +654,7 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 		    x -= w + d.width;
 		}
 	    }
-	    svg.append("text").html("test")
+	    svg.append("text").html(d['sentence'])
 	        .data([this])
                 .attr("x", x)
                 .attr("y", y)
@@ -785,35 +785,6 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 		disp = "inherit";
 	    }
 	    */
-	    var svg = d3.select("#chart").append("text")
-	        .attr("x", 0)
-		.attr("y", 0)
-		.attr("dy", ".35em")
-		.attr("text-anchor", "end")
-	        .attr("class", "comic-title")
-		.attr("transform", null)
-	        .attr("id", "svg")
-		.text(" - " + name)
-	        .data([{name: " - " + name, safe_name: safe_name}])
-	        .style("display", "block")
-	        .on("click", function(d) {
-		    var nodes = d3.selectAll(".chart").selectAll("[id=narrative]");
-		    var node;
-		    for (var i = 0; i < nodes.length; i++) {
-			if (nodes[i].parentNode.id == "narrative") {
-			    node = nodes[i].parentNode;
-			    break;
-			}
-		    }
-		    if (d.name[1] == '-') {
-			node.style.display = "none";
-			d.name = d.name.replace("-", "+");
-		    } else {
-			node.style.display = "inherit";
-			d.name = d.name.replace("+", "-");
-		    }
-		    d3.select(this).text(d.name);
-	        });
 
 	    var svg = d3.select("#chart").append("svg")
 		.attr("width", width + margin.left + margin.right)
