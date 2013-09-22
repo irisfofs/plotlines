@@ -8,17 +8,21 @@ function build_url(title) {
 }
 function get_html(title) {
 	$.ajax({
-		'dataType': 'xml',
+		// 'dataType': 'xml',
 		'url': 'server/wp.php',
-		'success': scrape,
+		// 'success': scrape,
+		'complete': console.log.bind(console),
 		'data': {
 			'url': build_url(title)
 		}
 	});
 }
 
+var dom;
 function scrape(article) {
 	console.log(article);
+
+	dom = article;
 }
 get_html('To Kill a Mockingbird');
 

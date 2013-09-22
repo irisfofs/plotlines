@@ -819,8 +819,9 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 		.attr("height", height + margin.top + margin.bottom)
                 .attr("class", "chart")
                 .attr("id", safe_name)
-		.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		.call(d3.behavior.zoom().scaleExtent([0.5, 5]).on("zoom", zoom))
+		.append("g");
+		// .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 
 	    var chars = [];
@@ -924,5 +925,10 @@ dir = "comics/narrative/";
 //draw_chart("Bone #28", "bone28", "bone28_narrative", true, false);
 //draw_chart("Chew #32", "chew32", "chew32_narrative", false, true);
 
+function zoom() {
+  d3.select("svg#homestuck>g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
 dir = '';
-draw_chart('Homestuck', 'homestuck', 'homestuck', true, false);
+safe_name = "homestuck"
+draw_chart('Homestuck', safe_name, 'homestuck', true, false);
