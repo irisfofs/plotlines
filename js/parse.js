@@ -17,19 +17,19 @@ function build_alchemy_url(endpoint, params) {
 
 function relations(text) {
 	return $.ajax({
-		'dataType': 'jsonp json',
-		'url': build_alchemy_url('relations'),
-		'jsonpCallback': 'parse',
+		'type': 'POST',
+		'dataType': 'json',
+		'url': 'server/al.php',
 		'async': false,
 
 		'data': {
+			'url': build_alchemy_url('relations'),
 			'text': text,
 			'outputMode': 'json',
-			'jsonp': 'parse',
 			'entities': '1',
 			'requireEntities': '1'
 		}
-	});
+	}).responseJSON;
 }
 
 function takePeople(entity) {
