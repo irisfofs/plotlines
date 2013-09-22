@@ -724,12 +724,12 @@ function draw_links(links, svg, safe_name) {
 
 
 
-function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse) {
-    d3.json(folder + "/reparsed.json", function(j) {
+function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
+    
 	var margin = {top: 20, right: 25, bottom: 20, left: 1};
 	var width = raw_chart_width - margin.left - margin.right;
 
-	var jscenes = j['scenes'];
+	var jscenes = info['sentences'];
 	// This calculation is only relevant for equal_scenes = true
 	var scene_width = (width-longest_name)/(jscenes.length+1);
 
@@ -764,13 +764,13 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 	total_panels += panel_shift;
 	panel_width = Math.min(width/total_panels, 15);
 
-	d3.xml(folder + "/characters.xml", function(x) {
-	    var xchars = read_chars(x);
+	// d3.xml(folder + "/characters.xml", function(x) {
+	    var xchars = info["people"];
 
 	    // Calculate chart height based on the number of characters
 	    // TODO: Redo this calculation
 	    //var raw_chart_height = xchars.length*(link_width + link_gap + group_gap);// - (link_gap + group_gap);
-	    var raw_chart_height = 360;
+	    var raw_chart_height = 500;
 	    var height = raw_chart_height - margin.top - margin.bottom;
 
 	    // Insert the collapsable title
@@ -791,7 +791,7 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 		.attr("text-anchor", "end")
 	        .attr("class", "comic-title")
 		.attr("transform", null)
-	        .attr("id", safe_name)
+	        .attr("id", "svg")
 		.text(" - " + name)
 	        .data([{name: " - " + name, folder: folder, safe_name: safe_name}])
 	        .style("display", "block")
@@ -827,8 +827,8 @@ function draw_chart(name, safe_name, folder, tie_breaker, center_sort, collapse)
 	    var chars = [];
 	    var char_map = []; // maps id to pointer
 	    for (var i = 0; i < xchars.length; i++) {
-		chars[chars.length] = new Character_(xchars[i].name, xchars[i].id, xchars[i].group);
-		char_map[xchars[i].id] = chars[chars.length-1];
+		chars[chars.length] = new Character_(xchars[i], i, i);
+		char_map[i] = chars[chars.length-1];
 	    }
 
 	    var groups = define_groups(chars);
@@ -926,10 +926,10 @@ dir = "comics/narrative/";
 //draw_chart("Chew #32", "chew32", "chew32_narrative", false, true);
 
 function zoom() {
-  d3.select("svg#homestuck>g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  d3.select("svg#svg>g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
 dir = '';
-safe_name = "homestuck";
+// safe_name = "homestuck";
 //draw_chart('Homestuck', safe_name, 'homestuck', true, false);
-draw_chart('Test', 'test', 'data', true, false);
+// draw_chart('Test', 'test', 'data', true, false);
