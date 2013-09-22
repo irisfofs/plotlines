@@ -1,10 +1,10 @@
 var apikey = '2094dd01fd7cbceb7e1bb916840e40e81f25d16f';
-var base = 'http://access.alchemyapi.com/';
+var alchemy_base = 'http://access.alchemyapi.com/';
 var endpoints = {
 	'relations': 'calls/text/TextGetRelations'
 };
 
-function build_url(endpoint, params) {
+function build_alchemy_url(endpoint, params) {
 	params = params || {};
 	params['apikey'] = apikey;
 
@@ -12,14 +12,15 @@ function build_url(endpoint, params) {
 	for (var k in params)
 		params_.push(encodeURIComponent(k) + '=' + encodeURIComponent(params[k]));
 
-	return base + endpoints[endpoint] + '?' + params_.join('&');
+	return alchemy_base + endpoints[endpoint] + '?' + params_.join('&');
 }
 
 function relations(text) {
 	return $.ajax({
 		'dataType': 'jsonp json',
-		'url': build_url('relations'),
+		'url': build_alchemy_url('relations'),
 		'jsonpCallback': 'parse',
+		'async': false,
 
 		'data': {
 			'text': text,
