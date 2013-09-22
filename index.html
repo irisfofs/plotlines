@@ -20,10 +20,7 @@
 	<header>
 		<h1>
 			<span id="name">Plotlines</span>
-			<form id="input" onsubmit="engage(); return false;">
-				<input type="text" id="title" name="title" placeholder="Enter a book or movie title" />
-				<input type="submit" id="go" value="Go">
-			</form>
+			<input type="text" id="title" name="title" placeholder="Enter a book or movie title" />
 		</h1>
 	</header>
 	<main>
@@ -34,7 +31,10 @@
 		</div>
 	</main>
 	<script type="text/javascript">
-		function engage() {
+		document.getElementById('title').onkeyup = function engage(e) {
+			if (e.keyCode !== 13)
+				return;
+
 			var title = document.getElementById('title').value;
 			try {
 				var data = parse(
@@ -48,10 +48,12 @@
 				draw_chart('narrative', 'narrative', format(data), true, false);
 			}
 			catch(e) {
-				if(e === "Synopsis not found") {
-					alert("No synopsis found for " + title);
-				} 
-				throw(e);
+				var errmsg = e;
+				if (e === "Synopsis not found") {
+					errmsg = "No synopsis found for " + title;
+					alert(errmsg);
+				}
+				throw errmsg;
 			}
 		}
 	</script>
