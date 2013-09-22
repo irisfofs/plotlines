@@ -605,6 +605,7 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 	.attr("y", function(d) { return 0; })
 	.attr("dy", ".35em")
 	.attr("text-anchor", "end")
+	.attr("class", "charname")
 	.attr("transform", null)
         //.attr("background", "#fff")
 	.text(function(d) { return d.name; })

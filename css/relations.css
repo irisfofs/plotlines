@@ -40,3 +40,7 @@ abbr {
 	font-weight: 700;
 	border-bottom: 1px dotted currentColor;
 }
+
+.charname {
+	font-weight: 300;
+}
