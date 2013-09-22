@@ -796,10 +796,10 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 	        .data([{name: " - " + name, safe_name: safe_name}])
 	        .style("display", "block")
 	        .on("click", function(d) {
-		    var nodes = d3.selectAll(".chart").selectAll("[id=\"" + d.safe_name + "\"]");
+		    var nodes = d3.selectAll(".chart").selectAll("[id=narrative]");
 		    var node;
 		    for (var i = 0; i < nodes.length; i++) {
-			if (nodes[i].parentNode.id == d.safe_name) {
+			if (nodes[i].parentNode.id == "narrative") {
 			    node = nodes[i].parentNode;
 			    break;
 			}
@@ -818,7 +818,7 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
                 .attr("class", "chart")
-                .attr("id", safe_name)
+                .attr("id", "narrative")
 		.call(d3.behavior.zoom().scaleExtent([0.5, 5]).on("zoom", zoom))
 		.append("g");
 		// .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -899,7 +899,7 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 
 	    height = groups[groups.length-1].max + group_gap*5;
 	    raw_chart_height = height + margin.top + margin.bottom;
-	    d3.select('svg#' + safe_name).style("height", raw_chart_height);
+	    d3.select('svg#narrative').style("height", raw_chart_height);
 
 	    /*
 	    groups.forEach(function(g) {
@@ -926,7 +926,7 @@ dir = "comics/narrative/";
 //draw_chart("Chew #32", "chew32", "chew32_narrative", false, true);
 
 function zoom() {
-  d3.select("svg#svg>g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  d3.select("svg#narrative>g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
 dir = '';
