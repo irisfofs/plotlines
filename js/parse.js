@@ -16,7 +16,7 @@ function build_alchemy_url(endpoint, params) {
 }
 
 function relations(text) {
-	return $.ajax({
+	var json = $.ajax({
 		'type': 'POST',
 		'dataType': 'json',
 		'url': 'server/al.php',
@@ -30,6 +30,9 @@ function relations(text) {
 			'requireEntities': '1'
 		}
 	}).responseJSON;
+	if (typeof json === 'undefined')
+		throw 'Could not retrieve relations from Alchemy API';
+	return json;
 }
 
 function takePeople(entity) {
