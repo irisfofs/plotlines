@@ -11,6 +11,7 @@
 	<!-- Vendor -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/vendor/d3/d3.v3.js"></script>
+	<script type="text/javascript" src="js/vendor/narrative/narrative.js"></script>
 
 	<script type="text/javascript" src="js/parse.js"></script>
 	<script type="text/javascript" src="js/scrape.js"></script>
@@ -18,7 +19,7 @@
 <body>
 	<header>
 		<h1>
-			<span id="name">Plotlines</span>&nbsp;
+			<span id="name">Plotlines</span>
 			<form id="input" onsubmit="engage(); return false;">
 				<input type="text" id="title" name="title" placeholder="Enter a book or movie title" />
 				<input type="submit" id="go" value="Go">
@@ -26,13 +27,16 @@
 		</h1>
 	</header>
 	<main>
-	</main>
-	<main id="t">
-		
+		<div id="chart">
+		</div>
+		<div id="t">
+		</div>
 	</main>
 	<script type="text/javascript">
 		function engage() {
-			table(parse(relations(scrape_wikipedia(document.getElementById('title').value))));
+			var data = parse(relations(scrape_wikipedia(document.getElementById('title').value)));
+			table(data);
+			draw_chart('narrative', 'narrative', format(data), true, false);
 		}
 	</script>
 </body>
