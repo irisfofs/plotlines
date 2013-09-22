@@ -49,20 +49,20 @@ function parse(data) {
 	});
 
 	var people = {};
-	var rel_people = data.relations.map(function(rel, i) {
+	var rel_people = data.relations.map(function(rel, r) {
 		var subjects = (rel.subject.entities || []).filter(takePeople).map(takeName);
 		var objects  = (rel.object && rel.object.entities || []).filter(takePeople).map(takeName);
 		subjects.forEach(function(person, i) {
 			if (!(person in people))
 				people[person] = { subjects: [], objects: [] };
-			people[person].subjects.push(i);
+			people[person].subjects.push(r);
 		});
 		objects.forEach(function(person, i) {
 			if (!(person in people))
 				people[person] = { subjects: [], objects: [] };
-			people[person].objects.push(i);
+			people[person].objects.push(r);
 		});
-		return { subjects: subjects, objects: objects };
+		return { subjects: subjects, objects: objects, both: subjects.concat(objects) };
 	});
 
 	return {
@@ -70,6 +70,22 @@ function parse(data) {
 		people: people,
 		relations: data.relations,
 		rel_people: rel_people
+	};
+}
+function format(data) {
+	return {
+		people: data.people,
+		sentences: data.sentences.map(function(sentence, i) {
+			return {
+				duration: 1,
+				start: i,
+				id: i,
+				sentence: sentence.sentence,
+				chars: [].concat.apply([],sentence.relations.map(function(r) {
+					return data.rel_people[r].both;
+				}))
+			};
+		})
 	};
 }
 function table(data) {
