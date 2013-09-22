@@ -18,7 +18,11 @@ function get_html(title) {
 }
 
 function scrape(doc, status, xhr) {
-	// window.doc = doc;
-	$(doc).find('#Plot_summary').parent().nextUntil('h2');
+	return window.doc = doc2text(doc);
+}
+function doc2text(doc) {
+	return $(doc).find('#Plot_summary').parent().next('div').nextUntil('h2').toArray().map(function (v) {
+	    return v.textContent;
+	}).join('\n');
 }
 get_html('To Kill a Mockingbird');
