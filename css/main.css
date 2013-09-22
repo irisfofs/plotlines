@@ -41,6 +41,7 @@ h1::after{
 }
 #title {
 	width: 400px;
+	font-weight: 300;
 }
 #go {
 	display: none;
