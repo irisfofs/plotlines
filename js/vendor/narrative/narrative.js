@@ -625,11 +625,11 @@ function draw_nodes(scenes, svg, chart_width, chart_height, folder, safe_name) {
 	im.name = "Scene panel";
 	
 	im.id = "scene" + d.id;
-	im.src = folder + "/scene_images/scene" + d.id + ".png";
+	im.src = "http://www.ledr.com/colours/red.jpg";
 	im.onload = function(e) {
 	    var w = this.width;
 	    var h = this.height;
-	    var x = d.x + d.width;
+	    var x = d.x + 50;
 	    var y = d.y + d.height;
 	    if (h > chart_height-y) {
 		var max_h = Math.max(y, chart_height-y);
@@ -653,7 +653,7 @@ function draw_nodes(scenes, svg, chart_width, chart_height, folder, safe_name) {
 		    x -= w + d.width;
 		}
 	    }
-	    svg.append("image")
+	    svg.append("text").html("test")
 	        .data([this])
                 .attr("x", x)
                 .attr("y", y)
