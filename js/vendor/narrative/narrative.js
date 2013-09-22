@@ -913,8 +913,8 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 	    */
 	    draw_links(links, svg);
 	    draw_nodes(scenes, svg, width, height, folder, raw_chart_height, safe_name);
-	}); // d3.xml (read chars)
-    }); // d3.json (read scenes)
+	// }); // d3.xml (read chars)
+    // }); // d3.json (read scenes)
 }
 
 dir = "comics/narrative/";
