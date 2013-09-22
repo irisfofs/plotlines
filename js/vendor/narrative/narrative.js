@@ -629,41 +629,6 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 
 	// console.log(d.sentence)
 
-	var im = new Image();
-	im.name = "Scene panel";
-	
-	im.id = "scene" + d.id;
-	// im.text = d.sentence;
-	im.onload = function(e) {
-	    var w = this.width;
-	    var h = this.height;
-	    var x = d.x + 50;
-	    var y = d.y + d.height;
-	    if (h > chart_height-y) {
-		var max_h = Math.max(y, chart_height-y);
-		if (h > max_h) {
-		    var ratio = max_h/h;
-		    h *= ratio;
-		    w *= ratio;
-		}
-		if (max_h == y) {
-		    y -= h + d.height;
-		}
-	    }
-	    if (w > chart_width-x) {
-		var max_w = Math.max(x, chart_width-x);	
-		if (w > max_w) {
-		    var ratio = max_w/w;
-		    h *= ratio;
-		    w *= ratio;
-		}
-		if (max_w == x) {
-		    x -= w + d.width;
-		}
-	    }
-
-	} // im.onload
-
 	// screen point
 	baseSVG = $("svg#narrative")[0];
 	baseGroup = $("svg#narrative>g")[0];
@@ -678,18 +643,6 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 	$("#hover").css("left", transform_pt.x);
 	$("#hover").css("top", transform_pt.y);
 	$("#hover").show();
-
-    svg.append("text")
-        .data([this])
-            .attr("x", d.x+50)
-            .attr("y", d.y+d.height)
-            .html(d.sentence)
-        .attr("transform", null)
-            .style("position", "relative")
-	.attr("id", this.id)
-        .attr("class", "scene-image")
-	.attr("width", 100)
-	.attr("height", text_height);
 
     } // mouseover
 

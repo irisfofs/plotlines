@@ -35,10 +35,11 @@
 	</main>
 	<script type="text/javascript">
 		function engage() {
+			var title = document.getElementById('title').value;
 			var data = parse(
 				relations(
 					scrape_wikipedia(
-						document.getElementById('title').value
+						title
 					)
 				)
 			);
@@ -47,7 +48,10 @@
 				draw_chart('narrative', 'narrative', format(data), true, false);
 			}
 			catch(e) {
-				throw(e);
+				if(e === "Synopsis not found") {
+					alert("No synopsis found for " + title);
+				} 
+					throw(e);
 			}
 		}
 	</script>
