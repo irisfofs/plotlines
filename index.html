@@ -51,9 +51,11 @@
 						'dataType': 'json',
 						'url': 'server/cache.php',
 						'data': {
-							'file': title + ".json";
+							'file': title + '.json'
 						}
-					}).done(function(json) { finish(json); });
+					}).done(function (json) {
+						finish(json);
+					});
 				} else {
 
 					var data = get_xml(
