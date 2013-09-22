@@ -17,17 +17,8 @@ function get_html(title) {
 	});
 }
 
-function scrape(article) {
-	console.log(article);
+function scrape(doc, status, xhr) {
+	// window.doc = doc;
+	$(doc).find('#Plot_summary').parent().nextUntil('h2');
 }
 get_html('To Kill a Mockingbird');
-
-// function scraper() {
-// 	// do all the scraping
-// 	console.log($(body).text());
-// 	return $(body).text();
-// }
-
-// console.log("Adding scraper");
-// pjs.addScraper(build_url("To Kill a Mockingbird"), scraper);
-// console.log("Scraper added");
