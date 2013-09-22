@@ -51,4 +51,5 @@ abbr {
 	background-color: rgba(255,255,255,0.6);
 	border:1px #000 solid;
 	padding:10px;
+	pointer-events:none;
 }
