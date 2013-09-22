@@ -626,7 +626,7 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
     function mouseover(d) {
 	if (d.char_node == true) return;
 
-	console.log(d.sentence)
+	// console.log(d.sentence)
 
 	var im = new Image();
 	im.name = "Scene panel";
