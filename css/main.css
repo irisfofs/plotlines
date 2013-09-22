@@ -1,0 +1,47 @@
+header, main {
+	max-width: 800px;
+	margin: auto;
+}
+
+input[type="text"], input[type="submit"] {
+	font-family: inherit;
+	font-size: inherit;
+
+	padding: 0.4em;
+	border: 2px solid #ccc;
+	border-radius: 6px;
+	outline: none;
+}
+input[type="text"]:focus, input[type="submit"]:focus {
+	border-color: #d95f38;
+	-webkit-transition: border 0.2s linear;
+	-moz-transition: border 0.2s linear;
+	-ms-transition: border 0.2s linear;
+	-o-transition: border 0.2s linear;
+	transition: border 0.2s linear;
+}
+input[type="submit"], button {
+	background: #d95f38;
+	padding: 0.4em;
+	border: none;
+	border-radius: 6px;
+}
+
+h1 {
+	text-align: justify;
+}
+h1::after{
+    content: "";
+    display: inline-block;
+    width: 100%;
+}
+#input {
+	display: inline-block;
+	width: auto;
+}
+#title {
+	width: 400px;
+}
+#go {
+	display: none;
+}

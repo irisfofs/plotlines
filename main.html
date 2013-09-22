@@ -5,44 +5,34 @@
 	<title>Plotlines</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="css/flat-ui.css" rel="stylesheet">
-
 	<link rel="stylesheet" href="css/relations.css" />
+	<link rel="stylesheet" href="css/main.css" />
 
 	<!-- Vendor -->
-	<script src="js/bootstrap.min.js"></script>
-
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/vendor/d3/d3.v3.js"></script>
 
 	<script type="text/javascript" src="js/parse.js"></script>
 	<script type="text/javascript" src="js/scrape.js"></script>
-	<script type="text/javascript" src="data/mock.js"></script>
 </head>
 <body>
-	<!-- <header> -->
-	<!-- </header> -->
-	<div class="jumbotron">
-		<div class="container">
-			<h1>Plotlines</h1>
-			<div class="input-group">
-				<form id="input" onsubmit="engage">
-					<input type="text" class="form-control" name="title" placeholder="Enter a book or movie title" size="25 ">
-					<input type="submit" id="go" class="btn btn-lg btn-primary" value="Go">
-				</form>
-			</div>
-		</div>
-	</div>
-
+	<header>
+		<h1>
+			<span id="name">Plotlines</span>&nbsp;
+			<form id="input" onsubmit="engage(); return false;">
+				<input type="text" id="title" name="title" placeholder="Enter a book or movie title" />
+				<input type="submit" id="go" value="Go">
+			</form>
+		</h1>
+	</header>
+	<main>
+	</main>
 	<main id="t">
 		
 	</main>
 	<script type="text/javascript">
-		// var title = prompt('Enter article title', 'To Kill a Mockingbird');
 		function engage() {
-			table(parse(relations(scrape_wikipedia($('input[type=text]').text()))));
+			table(parse(relations(scrape_wikipedia(document.getElementById('title').value))));
 		}
 	</script>
 </body>
