@@ -82,7 +82,7 @@ function format(data) {
 		sentences: data.sentences.map(function(sentence, i) {
 			return {
 				duration: 1,
-				start: i,
+				start: i*2,
 				id: i,
 				sentence: sentence.sentence,
 				chars: [].concat.apply([],sentence.relations.map(function(r) {

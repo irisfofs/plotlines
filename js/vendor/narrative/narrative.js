@@ -25,7 +25,7 @@ var per_width = 0.3;
 var name_shift = 10;
 
 // True: Use a white background for names
-var name_bg = true;
+var name_bg = false;
 
 // True: Disregard actual scene duration and make
 // all the scenes equal.
@@ -92,11 +92,12 @@ function Link(from, to, group, char_id) {
 } // Link
 
 
-function SceneNode(chars, start, duration, id) {
+function SceneNode(chars, start, duration, id, sentence) {
     this.chars = chars; // List of characters in the Scene (ids)
     this.start = start; // Scene starts after this many panels
     this.duration = duration; // Scene lasts for this many panels
     this.id = id;
+    this.sentence = sentence; // save sentence
 
     this.char_ptrs = [];
     // Determined later
@@ -373,14 +374,14 @@ function add_char_scenes(chars, scenes, links, groups, panel_shift, comic_name) 
     // Set y values
     var cury = 0;
     groups.forEach(function(g) {
-        var height = Math.max(10, g.all_chars.length*text_height);
+        var height = Math.max(2*text_height, g.all_chars.length*text_height);
 	g.min = cury;
 	g.max = g.min + height;
 	cury += height + group_gap;
     });
 
     for (var i = 0; i < chars.length; i++) {
-	var s = new SceneNode([chars[i].id], [0], [1]);
+	var s = new SceneNode([chars[i].id], [0], [1], [2]); // TODO: seems really weird
 	s.char_node = true;
 	s.y = i*text_height;
 	s.x = 0;
@@ -561,11 +562,11 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
       .attr("scene_id", function(d) { return d.id; })
       .on("mouseover", mouseover)
-      .on("mouseout", mouseout)
-    .call(d3.behavior.drag()
-      .origin(function(d) { return d; })
-      .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove));
+      .on("mouseout", mouseout);
+    // .call(d3.behavior.drag()
+    //   .origin(function(d) { return d; })
+    //   .on("dragstart", function() { this.parentNode.appendChild(this); })
+    //   .on("drag", dragmove));
       
     node.append("rect")
       .attr("width", function(d) { return d.width; })
@@ -574,26 +575,28 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
       .style("fill", function(d) { return "#fff"; })
       // .style("fill", "none")
       .style("stroke", function(d) { return "#333"; })
+      .style("opacity", function(d) { return 0.5; })
       .attr("rx", 20)
       .attr("ry", 10)
     .append("title")
       .text(function(d) { return d.name; });
 
+    char_width = 8;
     // White background for the names
     if (name_bg) {
-      node.append("rect")
-	.filter(function(d) {
-	    return d.char_node;
-	})
-	.attr("x", function(d) { 
-	    return -((d.name.length+2)*5); 
-	})
-	.attr("y", function(d) { return -3; })
-        .attr("width", function(d) { return (d.name.length+1)*5; })
-        .attr("height", 7.5)
-	.attr("transform", null)
-        .attr("fill", "#fff")
-        .style("opacity", 1);
+	      node.append("rect")
+		.filter(function(d) {
+		    return d.char_node;
+		})
+		.attr("x", function(d) { 
+		    return -((d.name.length+2)*char_width); 
+		})
+		.attr("y", function(d) { return -3; })
+	        .attr("width", function(d) { return (d.name.length+1)*char_width; })
+	        .attr("height", text_height)
+		.attr("transform", null)
+	        .attr("fill", "#fff")
+	        .style("opacity", 1);
     }
 
 
@@ -623,11 +626,13 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
     function mouseover(d) {
 	if (d.char_node == true) return;
 
-	var im = new Text();
+	console.log(d.sentence)
+
+	var im = new Image();
 	im.name = "Scene panel";
 	
 	im.id = "scene" + d.id;
-	im.text = d.sentence;
+	// im.text = d.sentence;
 	im.onload = function(e) {
 	    var w = this.width;
 	    var h = this.height;
@@ -655,25 +660,43 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 		    x -= w + d.width;
 		}
 	    }
-	    svg.append("text").html(d['sentence'])
-	        .data([this])
-                .attr("x", x)
-                .attr("y", y)
-		.attr("xlink:href", this.src)
-	        .attr("transform", null)
-                .style("position", "relative")
-		.attr("id", this.id)
-	        .attr("class", "scene-image")
-		.attr("width", w)
-		.attr("height", h);
+
 	} // im.onload
+
+	// screen point
+	baseSVG = $("svg#narrative")[0];
+	baseGroup = $("svg#narrative>g")[0];
+	matrix = baseGroup.getScreenCTM();
+
+	pt = baseSVG.createSVGPoint();
+	pt.x = d.x;
+	pt.y = d.y;
+	transform_pt = pt.matrixTransform(matrix);
+
+	$("#hover").text(d.sentence);
+	$("#hover").css("left", transform_pt.x);
+	$("#hover").css("top", transform_pt.y);
+	$("#hover").show();
+
+    svg.append("text")
+        .data([this])
+            .attr("x", d.x+50)
+            .attr("y", d.y+d.height)
+            .html(d.sentence)
+        .attr("transform", null)
+            .style("position", "relative")
+	.attr("id", this.id)
+        .attr("class", "scene-image")
+	.attr("width", 100)
+	.attr("height", text_height);
 
     } // mouseover
 
     function mouseout(d) {
-	//console.log("mouse out");
-	// could use d.id to remove just the one image
-	d3.selectAll("[class=\"scene-image\"]").remove();
+		//console.log("mouse out");
+		// could use d.id to remove just the one image
+		d3.selectAll("[class=\"scene-image\"]").remove();
+		$("#hover").hide()
     }
 
     function dragmove(d) {
@@ -749,7 +772,7 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 	    //if (chars.length == 0) continue;
 	    scenes[scenes.length] = new SceneNode(jscenes[i]['chars'], 
 						  start, duration, 
-						  parseInt(jscenes[i]['id']));
+						  parseInt(jscenes[i]['id']),jscenes[i]['sentence']);
 	    scenes[scenes.length-1].comic_name = safe_name;
 	    total_panels += duration;
 	} // for
