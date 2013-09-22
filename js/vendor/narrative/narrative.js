@@ -553,7 +553,7 @@ function calculate_link_positions(scenes, chars, groups, char_map) {
 } // calculate_link_positions
 
 
-function draw_nodes(scenes, svg, chart_width, chart_height, folder, safe_name) {
+function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
     var node = svg.append("g").selectAll(".node")
       .data(scenes)
     .enter().append("g")
@@ -793,7 +793,7 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 		.attr("transform", null)
 	        .attr("id", "svg")
 		.text(" - " + name)
-	        .data([{name: " - " + name, folder: folder, safe_name: safe_name}])
+	        .data([{name: " - " + name, safe_name: safe_name}])
 	        .style("display", "block")
 	        .on("click", function(d) {
 		    var nodes = d3.selectAll(".chart").selectAll("[id=\"" + d.safe_name + "\"]");
@@ -912,7 +912,7 @@ function draw_chart(name, safe_name, info, tie_breaker, center_sort, collapse) {
 		});
 	    */
 	    draw_links(links, svg);
-	    draw_nodes(scenes, svg, width, height, folder, raw_chart_height, safe_name);
+	    draw_nodes(scenes, svg, width, height, raw_chart_height, safe_name);
 	// }); // d3.xml (read chars)
     // }); // d3.json (read scenes)
 }
