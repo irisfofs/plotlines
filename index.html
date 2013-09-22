@@ -55,12 +55,7 @@
 			}
 			catch(e) {
 				title_el.className = 'error';
-				var errmsg = e;
-				if (e === "Synopsis not found") {
-					errmsg = "No synopsis found for " + title;
-					alert(errmsg);
-				}
-				throw errmsg;
+				alert(e);
 			}
 		}
 	</script>
