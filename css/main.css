@@ -2,6 +2,9 @@ header, main {
 	max-width: 800px;
 	margin: auto;
 }
+main {
+	max-width: 1200px;
+}
 
 input[type="text"], input[type="submit"] {
 	font-family: inherit;
