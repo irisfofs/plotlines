@@ -569,15 +569,16 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
     //   .on("drag", dragmove));
       
     node.append("rect")
-      .attr("width", function(d) { return d.width; })
+      .attr("width" , function(d) { return d.width;  })
       .attr("height", function(d) { return d.height; })
       .attr("class", "scene")
-      .style("fill", function(d) { return "#fff"; })
+      .style("fill", "#fff")
       // .style("fill", "none")
-      .style("stroke", function(d) { return "#333"; })
-      .style("opacity", function(d) { return 0.5; })
-      .attr("rx", 20)
-      .attr("ry", 10)
+      .style("stroke", "#333")
+      .style("stroke-dasharray", "1,2")
+      .style("opacity", 0.5)
+      .attr("rx", 4)
+      .attr("ry", 4)
     .append("title")
       .text(function(d) { return d.name; });
 
