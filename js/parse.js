@@ -16,6 +16,7 @@ function build_alchemy_url(endpoint, params) {
 }
 
 function relations(text, succ) {
+	console.log('foo');
 	$.ajax({
 		'type': 'POST',
 		'dataType': 'json',
