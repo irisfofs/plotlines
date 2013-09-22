@@ -4,7 +4,7 @@ var link_gap = 2;
 
 var node_width = 10; // Set to panel_width later
 var color = d3.scale.category10();
-var raw_chart_width = 1000;
+var raw_chart_width = 800;
 
 // Height of empty gaps between groups
 // (Sparse groups and group ordering already
@@ -12,7 +12,7 @@ var raw_chart_width = 1000;
 var group_gap = 0;
 
 // This is used for more than just text height.
-var text_height = 12;
+var text_height = 14;
 
 // If a name's x is smaller than this value * chart width,
 // the name appears at the start of the chart, as 
@@ -605,6 +605,7 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
 	.attr("y", function(d) { return 0; })
 	.attr("dy", ".35em")
 	.attr("text-anchor", "end")
+	.attr("class", "charname")
 	.attr("transform", null)
         // .attr("background", "#fff")
 	.text(function(d) { return d.name; })
