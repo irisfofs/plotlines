@@ -40,7 +40,7 @@ var sw_panels = 3;
 
 // Longest name in pixels to make space at the beginning 
 // of the chart. Can calculate but this works okay.
-var longest_name = 115;
+var longest_name = 180;
 
 // True: When deciding on which group to put a scene in,
 // if there's a tie, break the tie based on which
@@ -570,13 +570,13 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
       
     node.append("rect")
       .attr("width" , function(d) { return d.width;  })
-      .attr("height", function(d) { return d.height; })
+      .attr("height", function(d) { return Math.max(5, d.height); })
       .attr("class", "scene")
       .style("fill", "#fff")
       // .style("fill", "none")
       .style("stroke", "#333")
       .style("stroke-dasharray", "1,2")
-      .style("opacity", 0.5)
+      .style("opacity", 0.7)
       .attr("rx", 4)
       .attr("ry", 4)
     .append("title")
