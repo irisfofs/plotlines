@@ -53,3 +53,7 @@ abbr {
 	padding:10px;
 	pointer-events:none;
 }
+
+#sentencesButton{
+	text-align: right;
+}
