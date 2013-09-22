@@ -1,11 +1,10 @@
 import json
 
 SHOW_ALONE_TIME = False
-TOTAL_COMICS_SHOWN = 2000
-IN_FILE = "plotlines2.json"
+TOTAL_COMICS_SHOWN = 8000
+IN_FILE = "plotlines.json"
 CHAR_FILE = "characters.json"
 OUT_FILE = "reparsed.json"
-
 
 
 plotline = json.load(open(IN_FILE))

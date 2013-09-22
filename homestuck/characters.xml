@@ -19,7 +19,14 @@
 	<character group="17" id="17" name="Gamzee Makara"/>
 	<character group="18" id="18" name="Eridan Ampora"/>
 	<character group="19" id="19" name="Feferi Peixes"/>
-	<character group="20" id="20" name="uranianUmbra"/>
-	<character group="21" id="21" name="undyingUmbrage"/>
-	<character group="22" id="22" name="Jaspersprite"/>
+	<character group="20" id="20" name="uranianUmbra" />
+	<character group="21" id="21" name="NannaSprite" />
+	<character group="22" id="22" name="CalSprite" />
+	<character group="23" id="23" name="DaveSprite" />
+	<character group="24" id="24" name="undyingUmbrage" />
+	<character group="25" id="25" name="Jaspersprite" />
+	<character group="26" id="26" name="AradiaBot" />
+	<character group="27" id="27" name="MotherSprite" />
+	<character group="28" id="28" name="DragonSprite" />
+	<character group="29" id="29" name="JadeSprit" />
 </characters>
