@@ -4,7 +4,7 @@ var link_gap = 2;
 
 var node_width = 10; // Set to panel_width later
 var color = d3.scale.category10();
-var raw_chart_width = 800;
+var raw_chart_width = 1200;
 
 // Height of empty gaps between groups
 // (Sparse groups and group ordering already
