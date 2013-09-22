@@ -35,7 +35,13 @@
 	</main>
 	<script type="text/javascript">
 		function engage() {
-			var data = parse(relations(scrape_wikipedia(document.getElementById('title').value)));
+			var data = parse(
+				relations(
+					scrape_wikipedia(
+						document.getElementById('title').value
+					)
+				)
+			);
 			table(data);
 			try {
 				draw_chart('narrative', 'narrative', format(data), true, false);
