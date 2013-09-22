@@ -15,13 +15,11 @@ function build_alchemy_url(endpoint, params) {
 	return alchemy_base + endpoints[endpoint] + '?' + params_.join('&');
 }
 
-function relations(text) {
-	var json = $.ajax({
+function relations(text, succ) {
+	$.ajax({
 		'type': 'POST',
 		'dataType': 'json',
 		'url': 'server/al.php',
-		'async': false,
-
 		'data': {
 			'url': build_alchemy_url('relations'),
 			'text': text,
@@ -29,11 +27,13 @@ function relations(text) {
 			'entities': '1',
 			'requireEntities': '1'
 		}
-	}).responseJSON;
-	if (typeof json === 'undefined')
+	}).done(function(a, b, c) {
+		document.getElementById('title').className = 'twothirds';
+		succ(a, b, c);
+	}).fail(function(a, b, c) {
+		console.log(a,b,c);
 		throw 'Could not retrieve relations from Alchemy API';
-	document.getElementById('title').className = 'twothirds';
-	return json;
+	});
 }
 
 function takePeople(entity) {

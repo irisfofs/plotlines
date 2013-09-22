@@ -39,15 +39,19 @@
 
 			var title = title_el.value;
 			try {
-				var data = parse(
-					relations(
-						scrape_wikipedia(
-							title
-						)
-					)
+				var data = get_xml(
+					title,
+					function (xml) {
+						relations(
+							scrape_wikipedia(xml),
+							function (json) {
+								var data = parse(json);
+								table(data);
+								draw_chart('narrative', 'narrative', format(data), true, false);
+							}
+						);
+					}
 				);
-				table(data);
-				draw_chart('narrative', 'narrative', format(data), true, false);
 			}
 			catch(e) {
 				title_el.className = 'error';
