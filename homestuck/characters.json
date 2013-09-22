@@ -24,8 +24,10 @@
 	{"name": "CalSprite", "color": "#f2a400", "handles": []}, 
 	{"name": "DaveSprite", "color": "#f2a400", "handles": []}, 
 	{"name": "undyingUmbrage", "color": "#323232", "handles": []},
-	{"name": "Jaspersprite", "color": "#f141ef", "handles": []}
-	{"name": "AradiaBot", "color": "#a10000", "handles": []}
-	{"name": "MotherSprite", "color": "#008141", "handles": []}
+	{"name": "Jaspersprite", "color": "#f141ef", "handles": []},
+	{"name": "AradiaBot", "color": "#a10000", "handles": []},
+	{"name": "MotherSprite", "color": "#008141", "handles": []},
+	{"name": "DragonSprite", "color": "#008282", "handles": []},
+	{"name": "JadeSprite", "color": "#1f9400", "handles": []}
 ]
 
