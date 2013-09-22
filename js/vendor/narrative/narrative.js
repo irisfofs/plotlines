@@ -572,6 +572,7 @@ function draw_nodes(scenes, svg, chart_width, chart_height, safe_name) {
       .attr("height", function(d) { return d.height; })
       .attr("class", "scene")
       //.style("fill", function(d) { return "#1f77b4"; })
+      .style("fill", "none")
       //.style("stroke", function(d) { return "#0f3a58"; })
       .attr("rx", 20)
       .attr("ry", 10)
