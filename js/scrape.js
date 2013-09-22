@@ -22,11 +22,10 @@ function scrape_wikipedia(title) {
 	window.doc = doc;
 
 	// jQuery can be neat and stuff
-	heads = $(doc).find(h2s);
-	if(heads.length == 0) {
+	var heads = $(doc).find(h2s);
+	if (!heads.length)
 		throw "Synopsis not found"
-	}
-	heads.parent().nextUntil('h2').toArray().map(function (v) {
+	return heads.parent().nextUntil('h2').toArray().map(function (v) {
 	    return v.textContent;
 	}).join('\n');
 }
