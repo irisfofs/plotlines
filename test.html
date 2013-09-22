@@ -11,7 +11,11 @@
 	<script type="text/javascript" src="js/vendor/d3/d3.v3.js"></script>
 
 	<script type="text/javascript" src="js/parse.js"></script>
+	<script type="text/javascript" src="js/scrape.js"></script>
 	<script type="text/javascript" src="data/mock.js"></script>
+	<script type="text/javascript">
+parse(relations(scrape_wikipedia(prompt('Enter article title', 'To Kill a Mockingbird'))));
+	</script>
 </head>
 <body>
 	<header>

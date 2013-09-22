@@ -1,37 +1,28 @@
 var headings = ['Plot', 'Synopsis', 'Plot summary', 'Summary'];
+var h2s = headings.map(function(v) { return 'h2 span:contains("' + v + '")' }).join(', ');
 
-var base = 'http://en.wikipedia.org/wiki/';
+var wikipedia_base = 'http://en.wikipedia.org/wiki/';
 // var base = 'http://en.wikipedia.org/w/api.php?action=query&export&format=json&callback=scrape';
 
-function build_url(title) {
-	return base + encodeURIComponent(title);
+function build_wikipedia_url(title) {
+	return wikipedia_base + encodeURIComponent(title);
 }
-function get_html(title) {
-	$.ajax({
-		// 'dataType': 'xml',
+function get_xml(title) {
+	return $.ajax({
+		'dataType': 'xml',
 		'url': 'server/wp.php',
-		// 'success': scrape,
-		'complete': console.log.bind(console),
+		'async': false,
 		'data': {
-			'url': build_url(title)
+			'url': build_wikipedia_url(title)
 		}
-	});
+	}).responseXML;
 }
 
-var dom;
-function scrape(article) {
-	console.log(article);
+function scrape_wikipedia(title) {
+	var doc = get_xml(title);
+	window.doc = doc;
 
-	dom = article;
+	return $(doc).find(h2s).parent().nextUntil('h2').toArray().map(function (v) {
+	    return v.textContent;
+	}).join('\n');
 }
-get_html('To Kill a Mockingbird');
-
-// function scraper() {
-// 	// do all the scraping
-// 	console.log($(body).text());
-// 	return $(body).text();
-// }
-
-// console.log("Adding scraper");
-// pjs.addScraper(build_url("To Kill a Mockingbird"), scraper);
-// console.log("Scraper added");

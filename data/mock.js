@@ -1277,5 +1277,3 @@ var mock = {
     ]
 };
 */
-
-parse(mock);
