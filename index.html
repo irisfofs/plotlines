@@ -39,9 +39,10 @@
 				return;
 
 			var title = title_el.value;
-			var OFFLINE = true;
+			var OFFLINE = false;
 			try {
 				var finish = function (data) {
+						console.log(JSON.stringify(data));
 						table(data);
 						draw_chart('narrative', 'narrative', format(data), true, false);
 				};
@@ -51,7 +52,7 @@
 						'dataType': 'json',
 						'url': 'server/cache.php',
 						'data': {
-							'file': title + '.json'
+							'file': title.toLowerCase() + '.json'
 						}
 					}).done(function (json) {
 						finish(json);
