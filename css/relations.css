@@ -40,3 +40,12 @@ abbr {
 	font-weight: 700;
 	border-bottom: 1px dotted currentColor;
 }
+
+div.jumbotron {
+	width: 50%;
+	margin-left:auto;
+	margin-right:auto;
+}
+input[type=text], input.btn#go {
+	font-size: 2em;
+}
