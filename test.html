@@ -9,6 +9,7 @@
 	<!-- Vendor -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/vendor/d3/d3.v3.js"></script>
+	<script type="text/javascript" src="js/vendor/narrative.js"></script>
 
 	<script type="text/javascript" src="js/parse.js"></script>
 	<script type="text/javascript" src="js/scrape.js"></script>
@@ -18,12 +19,18 @@
 	<header>
 		<h1>Plotlines</h1>
 	</header>
+	<main id="chart">
+
+	</main>
 	<main id="t">
 		
 	</main>
 	<script type="text/javascript">
 		var title = prompt('Enter article title', 'To Kill a Mockingbird');
 		table(window.data = parse(relations(scrape_wikipedia(title))));
+
+		myJson = format(data);
+		draw_chart("narrative","narrative",myJson, true, false);
 	</script>
 </body>
 </html>
