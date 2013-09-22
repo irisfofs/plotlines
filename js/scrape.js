@@ -7,7 +7,7 @@ function build_wikipedia_url(title) {
 	return wikipedia_base + encodeURIComponent(title);
 }
 function get_xml(title) {
-	return $.ajax({
+	var xml = $.ajax({
 		'dataType': 'xml',
 		'url': 'server/wp.php',
 		'async': false,
@@ -15,6 +15,10 @@ function get_xml(title) {
 			'url': build_wikipedia_url(title)
 		}
 	}).responseXML;
+	if (typeof xml === 'undefined')
+		throw 'Could not retrieve text from Wikipedia';
+	document.getElementById('title').className = 'onethird';
+	return xml;
 }
 
 function scrape_wikipedia(title) {

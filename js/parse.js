@@ -32,6 +32,7 @@ function relations(text) {
 	}).responseJSON;
 	if (typeof json === 'undefined')
 		throw 'Could not retrieve relations from Alchemy API';
+	document.getElementById('title').className = 'twothirds';
 	return json;
 }
 
@@ -71,6 +72,7 @@ function parse(data) {
 	for (var person in people)
 		people_array.push(person);
 
+	document.getElementById('title').className = 'done';
 	return {
 		sentences: sentences,
 		people: people,

@@ -31,11 +31,13 @@
 		</div>
 	</main>
 	<script type="text/javascript">
-		document.getElementById('title').onkeyup = function engage(e) {
+		var title_el = document.getElementById('title');
+		title_el.onkeyup = function engage(e) {
+			title_el.className = '';
 			if (e.keyCode !== 13)
 				return;
 
-			var title = document.getElementById('title').value;
+			var title = title_el.value;
 			try {
 				var data = parse(
 					relations(
@@ -48,6 +50,7 @@
 				draw_chart('narrative', 'narrative', format(data), true, false);
 			}
 			catch(e) {
+				title_el.className = 'error';
 				var errmsg = e;
 				if (e === "Synopsis not found") {
 					errmsg = "No synopsis found for " + title;
