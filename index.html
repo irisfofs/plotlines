@@ -72,11 +72,7 @@
 						}
 					);
 				}
-				
-				document.getElementById('sentencesButton').innerHTML = "<button>Toggle Sentences</button>";
-				$("#sentencesButton").click(function(){
-  				$("#t").slideToggle('slow');
-				});
+				$("#sentencesButton").show();
 			}
 			catch(e) {
 				title_el.className = 'error';
@@ -84,6 +80,11 @@
 				throw e;
 			}
 		}
+		$("#sentencesButton").hide();
+		document.getElementById('sentencesButton').innerHTML = "<button>Toggle Sentences</button>";
+			$("#sentencesButton").click(function(){
+  			$("#t").slideToggle('slow');
+		});
 	</script>
 </body>
 </html>
