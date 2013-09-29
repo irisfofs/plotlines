@@ -17,7 +17,7 @@ function get_xml(title, succ) {
 		document.getElementById('title').className = 'onethird';
 		succ(a, b, c);
 	}).fail(function() {
-		throw 'Could not retrieve text from Wikipedia';
+		alert('Could not retrieve the Wikipedia article with title "' + title  + '"');
 	});
 }
 
@@ -25,8 +25,8 @@ function scrape_wikipedia(xml) {
 	// jQuery can be neat and stuff
 	var heads = $(xml).find(h2s);
 	if (!heads.length)
-		throw "Synopsis not found"
+		alert('Synopsis not found');
 	return heads.parent().nextUntil('h2').toArray().map(function (v) {
-	    return v.textContent;
+		return v.textContent;
 	}).join('\n');
 }

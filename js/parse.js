@@ -33,7 +33,7 @@ function relations(text, succ) {
 		succ(a, b, c);
 	}).fail(function(a, b, c) {
 		console.log(a,b,c);
-		throw 'Could not retrieve relations from Alchemy API';
+		alert('Could not retrieve relations from Alchemy API');
 	});
 }
 
