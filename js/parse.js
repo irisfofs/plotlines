@@ -16,7 +16,6 @@ function build_alchemy_url(endpoint, params) {
 }
 
 function relations(text, succ) {
-	console.log('foo');
 	$.ajax({
 		'type': 'POST',
 		'dataType': 'json',
@@ -32,7 +31,6 @@ function relations(text, succ) {
 		document.getElementById('title').className = 'twothirds';
 		succ(a, b, c);
 	}).fail(function(a, b, c) {
-		console.log(a,b,c);
 		alert('Could not retrieve relations from Alchemy API');
 	});
 }
