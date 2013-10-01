@@ -27,7 +27,9 @@
 		<p id="hover"></p>
 		<div id="chart">
 		</div>
-		<div id="sentencesButton"></div>
+		<div id="sentencesButton">
+			<a href="#">Toggle sentences</a>
+		</div>
 		<div id="t">
 		</div>
 	</main>
@@ -42,9 +44,10 @@
 			var OFFLINE = false;
 			try {
 				var finish = function (data) {
-						console.log(JSON.stringify(data));
-						table(data);
-						draw_chart('narrative', 'narrative', format(data), true, false);
+					console.log(JSON.stringify(data));
+					table(data);
+					draw_chart('narrative', 'narrative', format(data), true, false);
+					$("#sentencesButton").show();
 				};
 
 				if (OFFLINE) {
@@ -72,7 +75,6 @@
 						}
 					);
 				}
-				$("#sentencesButton").show();
 			}
 			catch(e) {
 				title_el.className = 'error';
@@ -81,8 +83,7 @@
 			}
 		}
 		$("#sentencesButton").hide();
-		document.getElementById('sentencesButton').innerHTML = "<button>Toggle Sentences</button>";
-			$("#sentencesButton").click(function(){
+		$("#sentencesButton a").click(function(){
 			$("#t").slideToggle('slow');
 		});
 	</script>
